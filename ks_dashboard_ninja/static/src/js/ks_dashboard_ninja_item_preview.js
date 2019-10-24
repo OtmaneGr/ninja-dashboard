@@ -97,7 +97,6 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_item_preview', function (requi
                 icon_select: field.ks_icon_select,
                 default_icon: field.ks_default_icon,
                 icon_color: ks_rgba_icon_color,
-                count_tooltip: field.ks_record_count,
             }
             if (field.ks_icon) {
 
@@ -128,7 +127,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_item_preview', function (requi
             switch (field.ks_layout) {
                 case 'layout1':
                     $val = $(QWeb.render('ks_db_list_preview_layout1', item_info));
-                        $val.css({
+                    $val.css({
                         "background-color": ks_rgba_background_color,
                         "color": ks_rgba_font_color
                     });
@@ -201,6 +200,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_item_preview', function (requi
 
 
         _renderReadonly: function ($val) {
+
             var self = this;
             var ks_icon_url;
             this._rpc({
@@ -212,6 +212,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_item_preview', function (requi
                 $val.find('.ks_db_list_image').attr('src', ks_icon_url)
                 self.$el.append($val)
             });
+
         },
 
 

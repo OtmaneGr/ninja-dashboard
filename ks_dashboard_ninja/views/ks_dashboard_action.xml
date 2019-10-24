@@ -8,13 +8,16 @@
                 <form string="Dashboard Item Action">
                     <group>
                         <group>
-                            <field name="ks_dashboard_item_ids" invisible='1' required="1"/>
+                            <field name="ks_dashboard_item_ids" invisible="1"/>
+                            <field name="ks_dashboard_item" invisible='1'/>
                             <field name="ks_dashboard_ninja_id"
-                                   attrs="{'invisible':[('ks_action','=','duplicate')], 'required':[('ks_action','=','move')]}"
-                                   options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
-                            <field name="ks_dashboard_ninja_ids" widget='many2many_tags'
-                                   attrs="{'invisible':[('ks_action','=','move')], 'required':[('ks_action','=','duplicate')]}"
-                                   options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                                   options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"
+                                   attrs="{'required' :[('ks_action','=','move')],'invisible':[('ks_action','=','duplicate')]}"/>
+                            <field name="ks_dashboard_ninja_ids"
+                                   options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"
+                                   attrs="{'required' :[('ks_action','=','duplicate')],'invisible':[('ks_action','=','move')]}"
+                                   widget="many2many_tags"/>
+
                         </group>
                         <group>
                             <field name="ks_action" required="1"/>

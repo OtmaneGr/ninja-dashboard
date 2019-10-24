@@ -7,16 +7,7 @@
     display: flex;
     justify-content: center;
 }
-.ks_color_white::before {
-    background: #ffffff;
-    color:black;
-}
-
-.ks_color_white {
-    border: 1px solid #bdbdbd
-}
-
-.ks_color_blue::before {
+.ks_color_blue::before{
     background: #337ab7;
 }
 .ks_color_red::before{
@@ -69,7 +60,11 @@
     -webkit-appearance: none;
 }
 
-/*Kpi CSS here*/
-.ks_kpi_target_grey {
-    color: #777777;
+.ks_color_white::before {
+    background: #ffffff;
+    color:black;
+}
+
+.ks_color_white {
+    border: 1px solid #bdbdbd
 }

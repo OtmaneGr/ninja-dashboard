@@ -94,11 +94,16 @@ odoo.define('ks_dashboard_ninja_list.ks_image_basic_widget', function (require) 
                 ks_self.$el.find('.ks_fa_icon_search').click()
             }
         },
+
+
     });
 
+
     registry.add('ks_image_widget', KsImageWidget);
+
 
     return {
         KsImageWidget: KsImageWidget,
     };
+
 });

@@ -1,17 +1,16 @@
-
-import re
 import datetime
 import io
 import json
 import operator
+import re
 
-from odoo.addons.web.controllers.main import ExportFormat,serialize_exception
-from odoo.tools.translate import _
 from odoo import http
-from odoo.http import content_disposition, request
-from odoo.tools.misc import xlwt
+from odoo.addons.web.controllers.main import ExportFormat, serialize_exception
 from odoo.exceptions import UserError
+from odoo.http import content_disposition, request
 from odoo.tools import pycompat
+from odoo.tools.misc import xlwt
+from odoo.tools.translate import _
 
 
 class KsChartExport(ExportFormat, http.Controller):
@@ -19,15 +18,15 @@ class KsChartExport(ExportFormat, http.Controller):
     def base(self, data, token):
         params = json.loads(data)
         header,chart_data = operator.itemgetter('header','chart_data')(params)
+
         chart_data = json.loads(chart_data)
         chart_data['labels'].insert(0,'Measure')
         columns_headers = chart_data['labels']
-        import_data = []
 
+        import_data = []
         for dataset in chart_data['datasets']:
             dataset['data'].insert(0, dataset['label'])
             import_data.append(dataset['data'])
-
         return request.make_response(self.from_data(columns_headers, import_data),
             headers=[('Content-Disposition',
                             content_disposition(self.filename(header))),

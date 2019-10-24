@@ -28,6 +28,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_item_theme', function (require
             if (this.mode === 'readonly') {
                 this.$el.find('.ks_dashboard_theme_view_render').addClass('ks_not_click');
             }
+
         },
 
         ks_dashboard_theme_input_container_click: function (e) {
@@ -41,6 +42,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_item_theme', function (require
             }
             self._setValue($box[0].value);
         },
+
     });
 
     registry.add('ks_dashboard_item_theme', KsDashboardTheme);

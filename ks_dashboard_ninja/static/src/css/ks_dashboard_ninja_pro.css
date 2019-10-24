@@ -1,6 +1,16 @@
-.ks_dashboard_item {
+.ks_dashboard_item{
+
     height: 132px;
 }
+
+/* Dashboard Empty Data Pro Css */
+/*
+.ks_pie_chart_nocontent{
+    background : transparent url(/ks_dashboard_ninja_pro/static/src/img/ks_empty_dashboard_item.png) no-repeat 0 0;
+    color: #777777;
+    background-size: 100% 100%;
+}
+*/
 
 /* Form pie chart no data */
 .ks_dn_graph_preview > .nv-noData > .ks_pie_chart_nocontent{
@@ -9,13 +19,8 @@
     font-size: 125%;
 }
 
-.ks_group_width {
-    width : 40% !important;
-}
-
-
 /* Chart No Content Css */
-.ks_chart_nocontent_form {
+.ks_chart_nocontent_form{
     display: inherit !important;
 }
 
@@ -38,19 +43,20 @@
     transform: translateX(-50%) translateY(-50%);
 }
 
+/*.ks_line_bar_chart_nocontent{
+    background: transparent url(/ks_dashboard_ninja_pro/static/src/img/ks_empty_dashboard_item.png) no-repeat 0 0;
+    color: #777777;
+    font-size: 125%;
+    background-size: 100% 100%;
+}*/
+
+
 
 .ks_dashboarditem_id, .ks_dashboarditem_chart_container{
     overflow-x : visible !important;
     overflow-y : visible !important;
 }
 
-.ks_dashboard_kpi{
-    overflow-y : auto !important;
-}
-
-.ks_dashboarditem_chart_container{
-    background : white;
-}
 
 /* Layout 6 exception case CSS */
 .ks_dashboard_item_header_l6{
@@ -67,6 +73,9 @@
 }
 
 
+
+
+
 /*---------------------------------------------------*/
 table#ksListViewTable {
   margin: 0 auto;
@@ -78,9 +87,51 @@ table#ksListViewTable {
   border-radius: 5px;
   width: -webkit-fill-available;
 }
+/*table#ksListViewTable caption {
+  font-size: 2rem; color: #444;
+  margin: 1rem;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/ksListViewTable.png), url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/ksListViewTable2.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left, center right;
+}*/
+/*
+table#ksListViewTable thead th { font-weight: 600; }
+table#ksListViewTable thead th, table#ksListViewTable tbody td {
+  padding: .8rem; font-size: 1.4rem;
+}
+table#ksListViewTable tbody td {
+  padding: .8rem; font-size: 1.4rem;
+  */
+/*color: #444; background: #eee;*//*
+
+}
+table#ksListViewTable tbody tr:not(:last-child) {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+@media screen and (max-width: 600px) {
+  table#ksListViewTable caption { background-image: none; }
+  table#ksListViewTable thead { display: none; }
+  table#ksListViewTable tbody td {
+    display: block; padding: .6rem;
+  }
+  table#ksListViewTable tbody tr td:first-child {
+    */
+/*background: #666; color: #fff;*//*
+
+  }
+	table#ksListViewTable tbody td:before {
+    content: attr(data-th);
+    font-weight: bold;
+    display: inline-block;
+    width: 6rem;
+  }
+}*/
 
 
-#ks_item_info {
+#ks_item_info{
     cursor:pointer;
 }
 
@@ -95,9 +146,8 @@ table#ksListViewTable {
     visibility: visible;
 }
 
- .ks_chart_inner_buttons{
+.ks_chart_inner_buttons{
     visibility: hidden;
-
 }
 
 .ks_chart_color_options, .ks_item_size_options{
@@ -122,15 +172,11 @@ table#ksListViewTable {
 
 .ks_dashboard_item_menu_show > .ks_chart_inner_buttons{
     visibility: visible !important;
+    /*position : relative;*/
 }
 
 .ksMaxTableContent{
     max-height: 300px;
-}
-
-
-.ks_list_view_container{
-    background : white;
 }
 
 .ks_chart_export_menu{
@@ -163,7 +209,11 @@ table#ksListViewTable {
 }
 
 
+
 .ks_chart_export_menu_item > i{
     padding-right: 10px;
 }
 
+.ks_dashboard_kpi {
+    overflow-y : auto !important;
+}

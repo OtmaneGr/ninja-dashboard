@@ -2,6 +2,9 @@
 
 <templates>
 
+
+    <!--    Using ks_am_element : Active Mode, ks_em_element : Edit Mode, ks_am_content_element : Active Mode with Contents-->
+
     <!--    Dashboard Header : Show title and dashboard settings button-->
     <t t-name="ksDashboardNinjaHeader">
         <div class="ks_dashboard_header d-flex p-3 w-100 bg-white justify-content-between flex-column flex-lg-row">
@@ -22,182 +25,206 @@
                                 <i class="fa fa-plus-circle"/>
                                 <span>Add Item</span>
                             </li>
-                            <li class="ks_dashboard_setting_container ks_dashboard_edit_layout ks_hide"
-                                title="Edit Layout">
-                                <i class="fa fa-pencil"/>
-                                <span>Edit Layout</span>
-                            </li>
                             <li class="ks_dashboard_setting_container print-dashboard-btn d-md-block d-lg-none ks_hide"
                                 title="Print">
                                 <i class="fa fa-print"/>
                                 <span>Print</span>
                             </li>
+
                         </ul>
                     </div>
                 </t>
             </div>
 
 
-                <div class="ks_dashboard_top_menu ks_select_none">
+            <div class="ks_dashboard_top_menu ks_select_none">
 
-                    <!--  Date Filter Selection Options (Hide default for no content view)-->
-                    <div class="ks_dashboard_link ks_am_content_element ks_hide mr-4">
-                        <div class="ks_date_filter_selection_input">
-                            <div class="ks_date_selection_box">
-                                <div class="btn-group ">
-                                    <button class="o_dropdown_toggler_btn btn btn-secondary dropdown-toggle ks_date_filter_dropdown"
-                                            data-toggle="dropdown"
-                                            aria-expanded="false">
-                                        <span class="fa fa-lg fa-calendar"/>
-                                        <span id="ks_date_filter_selection"/>
-                                        <span class="caret"/>
-                                    </button>
+                <!--  Date Filter Selection Options (Hide default for no content view)-->
+                <div class="ks_dashboard_link ks_am_content_element ks_hide">
+                    <div class="ks_date_filter_selection_input">
+                        <div class="ks_date_selection_box">
+                            <div class="btn-group ">
+                                <button class="o_dropdown_toggler_btn btn btn-secondary dropdown-toggle ks_date_filter_dropdown"
+                                        data-toggle="dropdown"
+                                        aria-expanded="false">
+                                    <span class="fa fa-lg fa-calendar"/>
+                                    <span id="ks_date_filter_selection">Date Filter</span>
+                                    <span class="caret"/>
+                                </button>
 
-                                    <ul id="ks_date_selector_container" class="dropdown-menu ks_date_filters_menu"
-                                        role="menu">
-                                        <li id="l_none">
-                                            <span class="df_selection_text">All Time</span>
+                                <ul id="ks_date_selector_container" class="dropdown-menu ks_date_filters_menu"
+                                    role="menu">
+                                    <li id="l_none">
+                                        <span class="df_selection_text">All Time</span>
+                                    </li>
+                                    <li class="divider"/>
+                                    <t t-foreach="date_selection_order" t-as="date_id">
+                                        <li t-att-id="date_id">
+                                            <span class="df_selection_text">
+                                                <t t-esc="date_selection_data[date_id]"/>
+                                            </span>
                                         </li>
-                                        <li class="divider"/>
-                                        <t t-foreach="date_selection_order" t-as="date_id">
-                                            <li t-att-id="date_id">
-                                                <span class="df_selection_text">
-                                                    <t t-esc="date_selection_data[date_id]"/>
-                                                </span>
-                                            </li>
-                                        </t>
-                                    </ul>
-                                </div>
+                                    </t>
+                                </ul>
                             </div>
 
-                            <!--Date input fields are shown only when Date Filter : Custom-->
-                            <div class="ks_date_input_fields ks_hide">
-                            </div>
                         </div>
-                        <div class="ks_date_apply_clear_print">
-                            <!--Apply and Clear buttons will only be shown when Date filter : Custom-->
-                            <button type='button' class='button btn btn-primary apply-dashboard-date-filter ks_hide'
-                            >Apply
-                            </button>
-                            <button type='button' class='button btn btn-primary clear-dashboard-date-filter ks_hide'
-                            >Clear
-                            </button>
-                            <button type='button'
-                                    class='btn btn-primary d-none d-lg-block fa fa-print print-dashboard-btn m-1 ml-3'
-                                    title="Print"/>
+
+                        <!--Date input fields are shown only when Date Filter : Custom-->
+                        <div class="ks_date_input_fields ks_hide">
+
                         </div>
                     </div>
-
-                    <t t-if="ks_dashboard_manager">
-
-                        <!-- Add and Edit buttons-->
-                        <div class="ks_dashboard_top_settings dropdown d-none d-lg-block">
-
-                            <button class="btn btn-primary ks_add_item_type_button dropdown-toggle mr-1"
-                                    data-toggle="dropdown"
-                                    aria-expanded="false">
-                                <span class="fa fa-lg fa-plus-circle"/>
-                                Add
-                                <span class="caret"/>
-                            </button>
-                            <ul id="ks_add_item_selection" class="dropdown-menu"
-                                role="menu">
-                                <li data-item="ks_tile">
-                                    <span class="df_selection_text">
-                                        Tile
-                                    </span>
-                                </li>
-                                <li data-item="ks_bar_chart">
-                                    <span class="df_selection_text">
-                                        Bar Chart
-                                    </span>
-                                </li>
-                                <li data-item="ks_horizontalBar_chart">
-                                    <span class="df_selection_text">
-                                        Horizontal Bar Chart
-                                    </span>
-                                </li>
-                                <li data-item="ks_line_chart">
-                                    <span class="df_selection_text">
-                                        Line Chart
-                                    </span>
-                                </li>
-                                <li data-item="ks_area_chart">
-                                    <span class="df_selection_text">
-                                        Area Chart
-                                    </span>
-                                </li>
-                                <li data-item="ks_pie_chart">
-                                    <span class="df_selection_text">
-                                        Pie Chart
-                                    </span>
-                                </li>
-                                <li data-item="ks_doughnut_chart">
-                                    <span class="df_selection_text">
-                                        Doughnut Chart
-                                    </span>
-                                </li>
-                                <li data-item="ks_polarArea_chart">
-                                    <span class="df_selection_text">
-                                        Polar Area Chart
-                                    </span>
-                                </li>
-                                <li data-item="ks_list_view">
-                                    <span class="df_selection_text">
-                                        List View
-                                    </span>
-                                </li>
-                                <li data-item="ks_kpi">
-                                    <span class="df_selection_text">
-                                        KPI
-                                    </span>
-                                </li>
-                            </ul>
-                            <button id="ks_dashboard_layout_edit" class="btn btn-primary ks_dashboard_edit_layout">
-                                <span class="fa fa-lg fa-pencil"/>
-                                Edit Layout
-                            </button>
-                        </div>
-
-                        <!-- This should only be shown on : Edit Mode Layout-->
-                        <div class="ks_dashboard_edit_mode_settings ks_hide">
-                            <div class="oe_dashboard_links ">
-                                <button type="button"
-                                        class="button ks_dashboard_save_layout btn btn-primary o_form_button_save"
-                                        title="Save Changes">
-                                    <span>Save</span>
-                                </button>
-
-                                <button type="button"
-                                        class="button ks_dashboard_cancel_layout btn btn-secondary o_form_button_cancel"
-                                        title="Discard Changes">
-                                    <span>Discard</span>
-                                </button>
-                            </div>
-                        </div>
-                    </t>
-
+                    <div class="ks_date_apply_clear_print">
+                        <!--Apply and Clear buttons will only be shown when Date filter : Custom-->
+                        <button type='button' class='button btn btn-primary apply-dashboard-date-filter ks_hide'
+                        >Apply
+                        </button>
+                        <button type='button' class='button btn btn-primary clear-dashboard-date-filter ks_hide'
+                        >Clear
+                        </button>
+                        <button type='button'
+                                class='btn btn-primary d-none d-lg-block fa fa-print print-dashboard-btn m-1 ml-3'
+                                title="Print"/>
+                    </div>
                 </div>
+                <t t-if="ks_dashboard_manager">
+                    <div class="ks_dashboard_top_settings dropdown d-none d-lg-block">
+
+                        <button class="btn btn-primary ks_add_item_type_button dropdown-toggle "
+                                data-toggle="dropdown"
+                                aria-expanded="false">
+                            <span class="fa fa-lg fa-plus-circle"/>
+                            Add
+                            <span class="caret"/>
+                        </button>
+
+                        <ul id="ks_add_item_selection" class="dropdown-menu"
+                            role="menu">
+                            <li data-item="ks_tile">
+                                <span class="df_selection_text">
+                                    Tile
+                                </span>
+                            </li>
+                            <li data-item="ks_bar_chart">
+                                <span class="df_selection_text">
+                                    Bar Chart
+                                </span>
+                            </li>
+                            <li data-item="ks_horizontalBar_chart">
+                                <span class="df_selection_text">
+                                    Horizontal Bar Chart
+                                </span>
+                            </li>
+                            <li data-item="ks_line_chart">
+                                <span class="df_selection_text">
+                                    Line Chart
+                                </span>
+                            </li>
+                            <li data-item="ks_area_chart">
+                                <span class="df_selection_text">
+                                    Area Chart
+                                </span>
+                            </li>
+                            <li data-item="ks_pie_chart">
+                                <span class="df_selection_text">
+                                    Pie Chart
+                                </span>
+                            </li>
+                            <li data-item="ks_doughnut_chart">
+                                <span class="df_selection_text">
+                                    Doughnut Chart
+                                </span>
+                            </li>
+                            <li data-item="ks_polarArea_chart">
+                                <span class="df_selection_text">
+                                    Polar Area Chart
+                                </span>
+                            </li>
+                            <li data-item="ks_list_view">
+                                <span class="df_selection_text">
+                                    List View
+                                </span>
+                            </li>
+                            <li data-item="ks_kpi">
+                                <span class="df_selection_text">
+                                    KPI
+                                </span>
+                            </li>
+                        </ul>
+                        <button id="ks_dashboard_layout_edit" class="btn btn-primary ks_dashboard_edit_layout">
+                            <span class="fa fa-lg fa-pencil"/>
+                            Edit Layout
+                        </button>
+                    </div>
+                    <!-- This should only be shown on : Edit Mode Layout-->
+                    <div class="ks_dashboard_edit_mode_settings ks_hide">
+                        <div class="oe_dashboard_links ">
+                            <button type="button"
+                                    class="button ks_dashboard_save_layout btn btn-primary o_form_button_save"
+                                    title="Save Changes">
+                                <span>Save</span>
+                            </button>
+
+                            <button type="button"
+                                    class="button ks_dashboard_cancel_layout btn btn-secondary o_form_button_cancel"
+                                    title="Discard Changes">
+                                <span>Discard</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </t>
+            </div>
+
+
         </div>
     </t>
 
-    <!--    Dashboard Main Body Container -->
-    <t t-name="ks_main_body_container">
-
-        <div class="ks_dashboard_main_content">
-            <div class="ks_dashboard_item_content grid-stack ks_dashboard_items_list m-3" data-gs-width="36"/>
+    <t t-name="ksQuickEditButtonContainer">
+        <div class="ks_dashboard_quick_edit_action dropdown grid-stack-item ks_quick_edit" t-att-data-gs-x="grid.gsX"
+             t-att-data-gs-y="grid.gsY" t-att-data-gs-width="grid.gsWidth" t-att-data-gs-height="grid.gsHeight">
+            <button data-toggle="dropdown"
+                    class="ks_dashboard_item_action ks_quick_edit_button btn dropdown-toggle btn-xs o-no-caret btn"
+                    type="button"
+            >
+                <i class="fa fa-cog"/>
+            </button>
+            <div role="menu" class="dropdown-menu ks_qe_dropdown_menu ">
+            </div>
         </div>
     </t>
 
-    <!--    Empty Dashboard View Layout-->
+    <t t-name="ksQuickEditViewOption">
+        <div>
+            <div class="ks_item_field_info">
+            </div>
+            <div class="ks_quick_edit_footer">
+                <button class="btn btn-primary ks_quick_edit_action"
+                        data-ks-item-action="saveItemInfo" type="button">Save
+                </button>
+                <button class="btn btn-secondary ks_quick_edit_action mx-2 ks_discard"
+                        data-ks-item-action="discardItemInfo"
+                        type="button">Discard
+                </button>
+                <button class="btn btn-primary ks_quick_edit_action"
+                        data-ks-item-action="fullItemInfo" type="button">Full Settings
+                </button>
+
+            </div>
+            <span class="ks_qe_footer_span"/>
+        </div>
+    </t>
+
     <t t-name="ksNoItemView">
-        <div class="o_view_nocontent">
-            <div class="o_nocontent_help">
-                <p class="o_view_nocontent_neutral_face">
+        <div class="oe_view_nocontent ks_oe_view_nocontent">
+            <div class="ks_empty_custom_dashboard">
+                <p>
                     Your personal dashboard is empty
                 </p>
                 <p>
-                    To add dashboard item, use <strong>Add button</strong> on top right corner.
+                    To add dashboard item, use <strong>Add</strong>button on top right corner.
+
                 </p>
             </div>
         </div>
@@ -210,7 +237,7 @@
             <div t-att-id="item.id"
                  t-att-class="'ks_dashboarditem_id ks_dashboard_item ks_dashboard_item_hover ' + ks_inner_container_class"
                  t-att-style="style_main_body">
-                <div class="ks_dashboard_item_button_container ks_dropdown_container ks_dashboard_item_header ks_dashboard_item_header_hover">
+                <div class="ks_dashboard_item_button_container ks_dashboard_item_header ks_dashboard_item_header_hover">
                     <t t-if="item.ksIsDashboardManager">
 
                         <!--  Dashboard Item Move/Copy Feature -->
@@ -218,21 +245,24 @@
                                 class="ks_dashboard_item_action btn dropdown-toggle btn-xs" type="button"
                                 aria-expanded="true">
                             <i class="fa fa-files-o"/>
+                            <span class="caret"></span>
                         </button>
                         <ul role="menu" class="ks_dashboard_menu_container dropdown-menu dropdown-menu-right">
                             <li class="ks_md_heading">
                                 <span>Select Dashboard</span>
                             </li>
-                            <li class="my-3">
+                            <li class="ks_dashboard_select">
                                 <select class="o_input o_group_selector o_add_group ks_dashboard_select">
                                     <t t-foreach="ks_dashboard_list" t-as="ks_dashboard">
                                         <option t-att-value="ks_dashboard['id']">
                                             <t t-esc="ks_dashboard['name']"/>
                                         </option>
+
                                     </t>
+
                                 </select>
                             </li>
-                            <li class="mt-3">
+                            <li class="ks_move_duplicate_button">
                                 <button class="btn btn-primary o_apply_group o_add_group ks_duplicate_item"
                                         tabindex="-1" type="button">Duplicate
                                 </button>
@@ -243,13 +273,12 @@
                         </ul>
 
                         <button title="Quick Customize"
-                                class="ks_dashboard_quick_edit_action_popup  btn d-sm-block d-none"
+                                class="ks_dashboard_quick_edit_action_popup  btn d-none ks_quick_button"
                                 type="button" t-att-data-item-id="item.id">
                             <i class="fa fa-pencil"/>
                         </button>
-
                         <button type="button" title="Customize Item"
-                                class="ks_dashboard_item_customize d-block d-sm-none">
+                                class="ks_dashboard_item_customize d-none ks_customise_button">
                             <i class="fa fa-pencil"/>
                         </button>
                         <button type="button" title="Remove Item" class="ks_dashboard_item_delete">
@@ -275,7 +304,7 @@
                         <div class="ks_dashboard_item_name" t-att-title="item.name">
                             <t t-esc="item.name"/>
                         </div>
-                        <div class="ks_dashboard_item_domain_count" t-att-title="data_count">
+                        <div class="ks_dashboard_item_domain_count" t-att-title="count">
                             <t t-esc="data_count"/>
                         </div>
                     </div>
@@ -303,7 +332,7 @@
                 </div>
 
                 <div class="ks_dashboard_item_main_body_l2 ">
-                    <div class="ks_dashboard_item_domain_count_l2" t-att-title="data_count">
+                    <div class="ks_dashboard_item_domain_count_l2" t-att-title="count">
                         <t t-esc="data_count"/>
                     </div>
                     <div class="ks_dashboard_item_name_l2" t-att-title="item.name">
@@ -312,7 +341,7 @@
                 </div>
 
                 <t t-if="item.ksIsDashboardManager">
-                    <div class="ks_dashboard_item_button_container ks_dropdown_container ks_dashboard_item_header_l6 ks_dashboard_item_header_hover">
+                    <div class="ks_dashboard_item_button_container ks_dashboard_item_header_l6 ks_dashboard_item_header_hover">
 
                         <!--  Dashboard Item Move/Copy Feature -->
                         <button title="Move/Duplicate" data-toggle="dropdown"
@@ -320,21 +349,24 @@
                                 type="button"
                                 aria-expanded="true">
                             <i class="fa fa-files-o"/>
+                            <span class="caret"></span>
                         </button>
                         <ul role="menu" class="ks_dashboard_menu_container dropdown-menu dropdown-menu-right">
                             <li class="ks_md_heading">
                                 <span>Select Dashboard</span>
                             </li>
-                            <li class="my-3">
+                            <li class="ks_dashboard_select">
                                 <select class="o_input o_group_selector o_add_group ks_dashboard_select">
                                     <t t-foreach="ks_dashboard_list" t-as="ks_dashboard">
                                         <option t-att-value="ks_dashboard['id']">
                                             <t t-esc="ks_dashboard['name']"/>
                                         </option>
+
                                     </t>
+
                                 </select>
                             </li>
-                            <li class="mt-3">
+                            <li class="ks_move_duplicate_button">
                                 <button class="btn btn-primary o_apply_group o_add_group ks_duplicate_item"
                                         tabindex="-1" type="button">Duplicate
                                 </button>
@@ -343,25 +375,26 @@
                                 </button>
                             </li>
                         </ul>
-
                         <button title="Quick Customize"
-                                class="ks_dashboard_quick_edit_action_popup  btn d-sm-block d-none"
+                                class="ks_dashboard_quick_edit_action_popup  btn d-none ks_quick_button"
                                 type="button" t-att-data-item-id="item.id">
                             <i class="fa fa-pencil"/>
                         </button>
-
                         <button type="button" title="Customize Item"
-                                class="ks_dashboard_item_customize d-block d-sm-none">
+                                class="ks_dashboard_item_customize d-none ks_customise_button">
                             <i class="fa fa-pencil"/>
                         </button>
                         <button type="button" title="Remove Item" class="ks_dashboard_item_delete">
                             <i class="fa fa-times"/>
                         </button>
+
                     </div>
                 </t>
+
             </div>
         </div>
     </t>
+
 
     <t t-name="ks_dashboard_item_layout3">
         <div t-att-class="'ks_item_click ' + ks_container_class">
@@ -369,7 +402,7 @@
                  t-att-class="'ks_dashboarditem_id ks_dashboard_item ks_dashboard_item_hover '+ ks_inner_container_class"
                  t-att-style="style_main_body">
 
-                <div class="ks_dashboard_item_button_container ks_dropdown_container ks_dashboard_item_header ks_dashboard_item_header_hover">
+                <div class="ks_dashboard_item_button_container ks_dashboard_item_header ks_dashboard_item_header_hover">
                     <t t-if="item.ksIsDashboardManager">
 
                         <!--  Dashboard Item Move/Copy Feature -->
@@ -377,21 +410,24 @@
                                 class="ks_dashboard_item_action btn dropdown-toggle btn-xs" type="button"
                                 aria-expanded="true">
                             <i class="fa fa-files-o"/>
+                            <span class="caret"></span>
                         </button>
                         <ul role="menu" class="ks_dashboard_menu_container dropdown-menu dropdown-menu-right">
                             <li class="ks_md_heading">
                                 <span>Select Dashboard</span>
                             </li>
-                            <li class="my-3">
+                            <li class="ks_dashboard_select">
                                 <select class="o_input o_group_selector o_add_group ks_dashboard_select">
                                     <t t-foreach="ks_dashboard_list" t-as="ks_dashboard">
                                         <option t-att-value="ks_dashboard['id']">
                                             <t t-esc="ks_dashboard['name']"/>
                                         </option>
+
                                     </t>
+
                                 </select>
                             </li>
-                            <li class="mt-3">
+                            <li class="ks_move_duplicate_button">
                                 <button class="btn btn-primary o_apply_group o_add_group ks_duplicate_item"
                                         tabindex="-1" type="button">Duplicate
                                 </button>
@@ -401,19 +437,19 @@
                             </li>
                         </ul>
                         <button title="Quick Customize"
-                                class="ks_dashboard_quick_edit_action_popup  btn d-sm-block d-none"
+                                class="ks_dashboard_quick_edit_action_popup  btn d-none ks_quick_button "
                                 type="button" t-att-data-item-id="item.id">
                             <i class="fa fa-pencil"/>
                         </button>
-
                         <button type="button" title="Customize Item"
-                                class="ks_dashboard_item_customize d-block d-sm-none">
+                                class="ks_dashboard_item_customize d-none ks_customise_button">
                             <i class="fa fa-pencil"/>
                         </button>
                         <button type="button" title="Remove Item" class="ks_dashboard_item_delete">
                             <i class="fa fa-times"/>
                         </button>
                     </t>
+
                 </div>
                 <div class="ks_dashboard_item_main_body">
                     <div class="ks_dashboard_icon_l3">
@@ -428,7 +464,7 @@
                         </t>
                     </div>
                     <div class="ks_dashboard_item_info ks_dashboard_item_info_l3">
-                        <div class="ks_dashboard_item_domain_count_l3" t-att-title="data_count">
+                        <div class="ks_dashboard_item_domain_count_l3" t-att-title="count">
                             <t t-esc="data_count"/>
                         </div>
                         <div class="ks_dashboard_item_name_l3" t-att-title="item.name">
@@ -459,16 +495,19 @@
                 </div>
 
                 <div class="ks_dashboard_item_main_body_l2 ks_bg_white">
-                    <div class="ks_dashboard_item_domain_count_l2" t-att-title="data_count">
+                    <div class="ks_dashboard_item_domain_count_l2" t-att-title="count">
                         <t t-esc="data_count"/>
                     </div>
                     <div class="ks_dashboard_item_name_l2" t-att-title="item.name">
                         <t t-esc="item.name"/>
                     </div>
+
+
                 </div>
 
+
                 <t t-if="item.ksIsDashboardManager">
-                    <div class="ks_dashboard_item_button_container ks_dropdown_container ks_dashboard_item_header_l6 ks_dashboard_item_header_hover">
+                    <div class="ks_dashboard_item_button_container ks_dashboard_item_header_l6 ks_dashboard_item_header_hover">
 
                         <!--  Dashboard Item Move/Copy Feature -->
                         <button title="Move/Duplicate" data-toggle="dropdown"
@@ -477,21 +516,24 @@
                                 type="button"
                                 aria-expanded="true">
                             <i class="fa fa-files-o"/>
+                            <span class="caret"></span>
                         </button>
                         <ul role="menu" class="ks_dashboard_menu_container dropdown-menu dropdown-menu-right">
                             <li class="ks_md_heading">
                                 <span>Select Dashboard</span>
                             </li>
-                            <li class="my-3">
+                            <li class="ks_dashboard_select">
                                 <select class="o_input o_group_selector o_add_group ks_dashboard_select">
                                     <t t-foreach="ks_dashboard_list" t-as="ks_dashboard">
                                         <option t-att-value="ks_dashboard['id']">
                                             <t t-esc="ks_dashboard['name']"/>
                                         </option>
+
                                     </t>
+
                                 </select>
                             </li>
-                            <li class="mt-3">
+                            <li class="ks_move_duplicate_button">
                                 <button class="btn btn-primary o_apply_group o_add_group ks_duplicate_item"
                                         tabindex="-1" type="button">Duplicate
                                 </button>
@@ -500,16 +542,13 @@
                                 </button>
                             </li>
                         </ul>
-
                         <button title="Quick Customize"
-                                class="ks_dashboard_quick_edit_action_popup  btn d-sm-block d-none"
+                                class="ks_dashboard_quick_edit_action_popup  btn d-none ks_quick_button"
                                 type="button" t-att-data-item-id="item.id">
                             <i class="fa fa-pencil"/>
                         </button>
-
-
                         <button type="button" title="Customize Item"
-                                class="ks_dashboard_item_customize d-block d-sm-none"
+                                class="ks_dashboard_item_customize d-none ks_customise_button"
                         >
                             <i class="fa fa-pencil"/>
                         </button>
@@ -517,9 +556,19 @@
                         >
                             <i class="fa fa-times"/>
                         </button>
+
                     </div>
                 </t>
+
             </div>
+        </div>
+    </t>
+
+    <!--    Dashboard Main Body Container -->
+    <t t-name="ks_main_body_container">
+
+        <div class="ks_dashboard_main_content">
+            <div class="ks_dashboard_item_content grid-stack ks_dashboard_items_list m-3" data-gs-width="36"/>
         </div>
     </t>
 
@@ -540,7 +589,7 @@
                     </t>
                 </div>
                 <div class="ks_dashboard_item_main_body_l5">
-                    <div class="ks_dashboard_item_domain_count_l5" t-att-title="data_count">
+                    <div class="ks_dashboard_item_domain_count_l5" t-att-title="count">
                         <t t-esc="data_count"/>
                     </div>
                     <div class="ks_dashboard_item_name_l5" t-att-title="item.name">
@@ -549,28 +598,31 @@
                 </div>
                 <t t-if="item.ksIsDashboardManager">
 
-                    <div class="ks_dashboard_item_button_container ks_dropdown_container ks_dashboard_item_header_l2 ks_dashboard_item_header_hover">
+                    <div class="ks_dashboard_item_button_container ks_dashboard_item_header_l2 ks_dashboard_item_header_hover">
 
                         <!--  Dashboard Item Move/Copy Feature -->
                         <button title="Move/Duplicate" data-toggle="dropdown"
                                 class="ks_dashboard_item_action btn dropdown-toggle btn-xs" type="button"
                                 aria-expanded="true">
                             <i class="fa fa-files-o"/>
+                            <span class="caret"></span>
                         </button>
                         <ul role="menu" class="ks_dashboard_menu_container dropdown-menu dropdown-menu-right">
                             <li class="ks_md_heading">
                                 <span>Select Dashboard</span>
                             </li>
-                            <li class="my-3">
+                            <li class="ks_dashboard_select">
                                 <select class="o_input o_group_selector o_add_group ks_dashboard_select">
                                     <t t-foreach="ks_dashboard_list" t-as="ks_dashboard">
                                         <option t-att-value="ks_dashboard['id']">
                                             <t t-esc="ks_dashboard['name']"/>
                                         </option>
+
                                     </t>
+
                                 </select>
                             </li>
-                            <li class="mt-3">
+                            <li class="ks_move_duplicate_button">
                                 <button class="btn btn-primary o_apply_group o_add_group ks_duplicate_item"
                                         tabindex="-1" type="button">Duplicate
                                 </button>
@@ -579,20 +631,19 @@
                                 </button>
                             </li>
                         </ul>
-
                         <button title="Quick Customize"
-                                class="ks_dashboard_quick_edit_action_popup  btn d-sm-block d-none"
+                                class="ks_dashboard_quick_edit_action_popup  btn d-none ks_quick_button "
                                 type="button" t-att-data-item-id="item.id">
                             <i class="fa fa-pencil"/>
                         </button>
-
                         <button type="button" title="Customize Item"
-                                class="ks_dashboard_item_customize d-block d-sm-none">
+                                class="ks_dashboard_item_customize d-none ks_customise_button">
                             <i class="fa fa-pencil"/>
                         </button>
                         <button type="button" title="Remove Item" class="ks_dashboard_item_delete">
                             <i class="fa fa-times"/>
                         </button>
+
                     </div>
                 </t>
             </div>
@@ -608,12 +659,14 @@
 
 
                 <div class="ks_dashboard_item_main_body_l2">
-                    <div class="ks_dashboard_item_domain_count_l2" t-att-title="data_count">
+                    <div class="ks_dashboard_item_domain_count_l2" t-att-title="count">
                         <t t-esc="data_count"/>
                     </div>
                     <div class="ks_dashboard_item_name_l2" t-att-title="item.name">
                         <t t-esc="item.name"/>
                     </div>
+
+
                 </div>
 
                 <div class="ks_dashboard_icon_l2">
@@ -627,30 +680,33 @@
                               t-att-class="'fa fa-' + item.ks_default_icon + ' fa-5x'"/>
                     </t>
                 </div>
-
+                <!--                <div>-->
                 <t t-if="item.ksIsDashboardManager">
-                    <div class="ks_dashboard_item_button_container ks_dropdown_container ks_dashboard_item_header_l6 ks_dashboard_item_header_hover">
+                    <div class="ks_dashboard_item_button_container ks_dashboard_item_header_l6 ks_dashboard_item_header_hover">
 
                         <!--  Dashboard Item Move/Copy Feature -->
                         <button title="Move/Duplicate" data-toggle="dropdown"
                                 class="ks_dashboard_item_action btn dropdown-toggle btn-xs" type="button"
                                 aria-expanded="true">
                             <i class="fa fa-files-o"/>
+                            <span class="caret"></span>
                         </button>
                         <ul role="menu" class="ks_dashboard_menu_container dropdown-menu dropdown-menu-right">
                             <li class="ks_md_heading">
                                 <span>Select Dashboard</span>
                             </li>
-                            <li class="my-3">
+                            <li class="ks_dashboard_select">
                                 <select class="o_input o_group_selector o_add_group ks_dashboard_select">
                                     <t t-foreach="ks_dashboard_list" t-as="ks_dashboard">
                                         <option t-att-value="ks_dashboard['id']">
                                             <t t-esc="ks_dashboard['name']"/>
                                         </option>
+
                                     </t>
+
                                 </select>
                             </li>
-                            <li class="mt-3">
+                            <li class="ks_move_duplicate_button">
                                 <button class="btn btn-primary o_apply_group o_add_group ks_duplicate_item"
                                         tabindex="-1" type="button">Duplicate
                                 </button>
@@ -659,35 +715,41 @@
                                 </button>
                             </li>
                         </ul>
-
                         <button title="Quick Customize"
-                                class="ks_dashboard_quick_edit_action_popup  btn d-sm-block d-none"
+                                class="ks_dashboard_quick_edit_action_popup  btn d-none ks_quick_button"
                                 type="button" t-att-data-item-id="item.id">
                             <i class="fa fa-pencil"/>
                         </button>
-
                         <button type="button" title="Customize Item"
-                                class="ks_dashboard_item_customize d-block d-sm-none">
+                                class="ks_dashboard_item_customize d-none ks_customise_button">
                             <i class="fa fa-pencil"/>
                         </button>
                         <button type="button" title="Remove Item" class="ks_dashboard_item_delete">
                             <i class="fa fa-times"/>
                         </button>
+
                     </div>
                 </t>
+
+                <!--                </div>-->
+
             </div>
         </div>
     </t>
-
 
     <t t-name="ks_dashboard_item_layout_default">
         <div t-att-class="'ks_item_click ' + ks_container_class">
             <div t-att-id="item.id" class="ks_dashboard_item ks_dashboard_item_hover"
                  t-att-style="style_main_body">
                 <t t-if="item.ksIsDashboardManager">
-
+                    <button title="Quick Customize"
+                            class="ks_dashboard_quick_edit_action_popup  btn d-none ks_quick_button"
+                            type="button" t-att-data-item-id="item.id">
+                        <i class="fa fa-pencil"/>
+                    </button>
                     <div class="ks_dashboard_item_header ks_dashboard_item_header_hover">
-                        <button type="button" title="Customize Item" class="ks_dashboard_item_customize">
+                        <button type="button" title="Customize Item"
+                                class="ks_dashboard_item_customize d-none ks_customise_button">
                             <i class="fa fa-pencil"/>
                         </button>
                         <button type="button" title="Remove Item" class="ks_dashboard_item_delete">
@@ -723,9 +785,9 @@
                         <t t-esc="count_1"/>
                     </div>
                 </div>
-                <div class=" d-flex ks_target_previous">
+                <div class="ks_kpi_d_flex ks_target_previous">
                     <t t-if="ks_enable_goal">
-                        <div >
+                        <div>
                             <div style="color: rgba(0, 0, 0, 0.61);; ">
                                 <span>vs Target</span>
                             </div>
@@ -786,13 +848,13 @@
                         </ul>
 
                         <button title="Quick Customize"
-                                class="ks_dashboard_quick_edit_action_popup  btn d-sm-block d-none"
+                                class="ks_dashboard_quick_edit_action_popup  btn ks_quick_button d-none"
                                 type="button" t-att-data-item-id="item.id">
                             <i class="fa fa-pencil"/>
                         </button>
 
                         <button type="button" title="Customize Item"
-                                class="ks_dashboard_item_customize d-block d-sm-none">
+                                class="ks_dashboard_item_customize d-none ks_customise_button">
                             <i class="fa fa-pencil"/>
                         </button>
                         <button type="button" title="Remove Item" class="ks_dashboard_item_delete">
@@ -820,10 +882,10 @@
                     </t>
                 </div>
                 <div class="ks_dashboard_item_main_body_l5 ks_kpi_main_body">
-                    <div class="ks_dashboard_kpi_name_preview">
+                    <div class="ks_dashboard_kpi_name_preview" t-att-title="name">
                         <t t-esc="name"/>
                     </div>
-                    <div class="ks_dashboard_kpi_count_preview" t-att-title="count_1_tooltip">
+                    <div class="ks_dashboard_kpi_count_preview" t-att-title="count_1_tooltip +' / '+target_tooltip">
                         <span class="ks_count">
                             <t t-esc="count_1"/>
                         </span>
@@ -833,16 +895,16 @@
                         </span>
                     </div>
                 </div>
-                <div class="text-center ks_progress">
+                <div class="ks_text_center ks_progress">
                     <div>
                         <progress id="ks_progressbar" value="0" max="100"/>
                     </div>
-                    <div class="text-center">
+                    <div class="ks_text_center">
                         <t t-esc="target_progress_deviation"/>%
                     </div>
                 </div>
                 <t t-if="ks_previous_period and previous_period_data">
-                    <div class="text-center mt-1">
+                    <div class="ks_text_center ks_margin_top">
                         <div>
                             <span>vs Prev</span>
                         </div>
@@ -888,13 +950,13 @@
                         </ul>
 
                         <button title="Quick Customize"
-                                class="ks_dashboard_quick_edit_action_popup  btn d-sm-block d-none"
+                                class="ks_dashboard_quick_edit_action_popup  btn ks_quick_button d-none"
                                 type="button" t-att-data-item-id="item.id">
                             <i class="fa fa-pencil"/>
                         </button>
 
                         <button type="button" title="Customize Item"
-                                class="ks_dashboard_item_customize d-block d-sm-none">
+                                class="ks_dashboard_item_customize d-none ks_customise_button">
                             <i class="fa fa-pencil"/>
                         </button>
                         <button type="button" title="Remove Item" class="ks_dashboard_item_delete">
@@ -922,21 +984,31 @@
                     </t>
                 </div>
                 <div class="ks_dashboard_item_main_body_l5 ks_kpi_main_body">
-                    <div class="ks_dashboard_kpi_name_preview">
+                    <div class="ks_dashboard_kpi_name_preview" t-att-title="name">
                         <t t-esc="name"/>
                     </div>
-                    <div class="ks_dashboard_kpi_count_preview" t-att-title="count_tooltip">
-                        <span>
-                            <t t-esc="count"/>
-                            <t t-if="target_view =='Progress Bar' and target_enable">/
+
+                    <t t-if="target_view =='Progress Bar' and target_enable">
+                        <div class="ks_dashboard_kpi_count_preview" t-att-title="count_tooltip +' / '+ target_tooltip">
+                            <span>
+                                <t t-esc="count"/>
+                                /
                                 <t t-esc="target"/>
-                            </t>
-                        </span>
-                    </div>
+                            </span>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="ks_dashboard_kpi_count_preview" t-att-title="count_tooltip">
+                            <span>
+                                <t t-esc="count"/>
+                            </span>
+                        </div>
+                    </t>
+
                 </div>
                 <t t-if="ks_enable_goal and target_enable">
                     <t t-if="target_deviation and target_view =='Number'">
-                        <div class="text-center">
+                        <div class="ks_text_center">
                             <div>
                                 <span class="ks_kpi_target_grey">vs Target</span>
                             </div>
@@ -951,11 +1023,11 @@
                         </div>
                     </t>
                     <t t-if="target_progress_deviation and target_view =='Progress Bar'">
-                        <div class="text-center  ks_progress">
+                        <div class="ks_text_center  ks_progress">
                             <div>
                                 <progress id="ks_progressbar" value="0" max="100"/>
                             </div>
-                            <div class="text-center">
+                            <div class="ks_text_center">
                                 <t t-esc="target_progress_deviation"/>
                             </div>
                         </div>
@@ -994,13 +1066,13 @@
                         </ul>
 
                         <button title="Quick Customize"
-                                class="ks_dashboard_quick_edit_action_popup  btn d-sm-block d-none"
+                                class="ks_dashboard_quick_edit_action_popup  btn ks_quick_button d-none"
                                 type="button" t-att-data-item-id="item.id">
                             <i class="fa fa-pencil"/>
                         </button>
 
                         <button type="button" title="Customize Item"
-                                class="ks_dashboard_item_customize d-block d-sm-none">
+                                class="ks_dashboard_item_customize d-none ks_customise_button">
                             <i class="fa fa-pencil"/>
                         </button>
                         <button type="button" title="Remove Item" class="ks_dashboard_item_delete">
@@ -1012,19 +1084,5 @@
         </div>
     </t>
 
-
-    <t t-name="ksQuickEditButtonContainer">
-        <div class="ks_dashboard_quick_edit_action grid-stack-item" t-att-data-gs-x="grid.gsX"
-             t-att-data-gs-y="grid.gsY" t-att-data-gs-width="grid.gsWidth" t-att-data-gs-height="grid.gsHeight">
-            <button title="Quick Customize" data-toggle="dropdown"
-                    class="ks_dashboard_item_action  btn dropdown-toggle btn-xs o-no-caret btn"
-                    type="button"
-                    aria-expanded="true">
-                <i class="fa fa-cog"/>
-            </button>
-            <div role="menu" class="dropdown-menu ks_qe_dropdown_menu ">
-            </div>
-        </div>
-    </t>
 
 </templates>

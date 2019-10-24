@@ -106,6 +106,4 @@ odoo.define('ks_dashboard_ninja_list.ks_widget_toggle', function (require) {
         KsWidgetToggleKPI: KsWidgetToggleKPI,
         KsWidgetToggleKpiTarget :KsWidgetToggleKpiTarget
     };
-
-
 });

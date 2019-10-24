@@ -1,7 +1,6 @@
 /*
 Gridstack Custom CSS for 35 width
 */
-
 .grid-stack > .grid-stack-item[data-gs-width="1"] {
   width: 2.777777778%;
 }
@@ -460,9 +459,4 @@ Gridstack Custom CSS for 35 width
 /* Mobile view item no scroll fix */
 .grid-stack>.grid-stack-item>.ui-draggable-handle{
     touch-action: unset;
-}
-
-
-.grid-stack > .grid-stack-item > .grid-stack-item-content {
-
 }

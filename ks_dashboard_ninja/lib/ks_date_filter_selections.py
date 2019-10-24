@@ -22,6 +22,7 @@ def ks_date_series_l(ks_date_selection):
     ks_date_data["selected_end_date"] = datetime.strptime(datetime.now().strftime("%Y-%m-%d 23:59:59"),'%Y-%m-%d %H:%M:%S')
     ks_date_data["selected_start_date"] = datetime.strptime((datetime.now() - timedelta(
         days=date_filter_options[ks_date_selection])).strftime("%Y-%m-%d 00:00:00"),'%Y-%m-%d %H:%M:%S')
+
     return ks_date_data
 
 

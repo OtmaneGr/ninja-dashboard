@@ -118,55 +118,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_kpi_preview', function (requir
                 this.$el.append("Select a Model first")
             }
         },
-        ksSum: function(count_1, count_2, item_info,field,target_1,$kpi_preview,kpi_data){
-            var self = this;
-            var count = count_1 + count_2
-            item_info['count'] = self.ksNumFormatter(count, 1);
-            item_info['count_tooltip'] = count;
-            item_info['target_enable'] = field.ks_goal_enable;
-            var ks_color = (target_1-count)>0? "red" : "green";
-            item_info.pre_arrow = (target_1-count)>0? "down" : "up";
-            item_info['ks_comparison'] = true;
-            var target_deviation = (target_1-count)>0? Math.round(((target_1-count)/target_1)*100) : Math.round((Math.abs((target_1-count))/target_1)*100);
-            if (target_deviation!==Infinity)  item_info.target_deviation = field_utils.format.integer(target_deviation) + "%";
-            else {
-                item_info.pre_arrow = false;
-                item_info.target_deviation = target_deviation;
-            }
-            var target_progress_deviation = target_1 == 0 ? 0 : Math.round((count/target_1)*100);
-            item_info.target_progress_deviation = field_utils.format.integer(target_progress_deviation) + "%";
-            $kpi_preview = $(Qweb.render("ks_kpi_preview_template_2",item_info));
-            $kpi_preview.find('.target_deviation').css({
-                "color":ks_color
-            });
-            if(this.recordData.ks_target_view === "Progress Bar"){
-                $kpi_preview.find('#ks_progressbar').val(target_progress_deviation)
-            }
-            return $kpi_preview
-        },
-        ksPercentage: function(count_1,count_2,field,item_info,target_1,$kpi_preview){
-            var count = parseInt((count_1/count_2)*100);
-            if(!count) count = 0;
 
-            item_info['count'] = count ? field_utils.format.integer(count)+"%" : "0%";
-            item_info['count_tooltip'] = count ? count+"%" : "0%";
-            item_info.target_progress_deviation = item_info['count']
-            target_1 = target_1 > 100 ? 100 : target_1;
-            item_info.target = target_1 + "%";
-            item_info.pre_arrow = (target_1-count)>0? "down" : "up";
-            var ks_color = (target_1-count)>0? "red" : "green";
-            item_info['target_enable'] = field.ks_goal_enable;
-            item_info['ks_comparison'] = false;
-            item_info.target_deviation = item_info.target > 100 ? 100 : item_info.target;
-             $kpi_preview = $(Qweb.render("ks_kpi_preview_template_2",item_info));
-            $kpi_preview.find('.target_deviation').css({
-                "color":ks_color
-            });
-            if(this.recordData.ks_target_view === "Progress Bar"){
-                $kpi_preview.find('#ks_progressbar').val(count)
-            }
-            return $kpi_preview;
-        },
         renderKpi: function(){
             var self = this;
             var field =  this.recordData;
@@ -211,6 +163,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_kpi_preview', function (requir
                 ks_enable_goal: field.ks_goal_enable,
                 ks_previous_period: ks_valid_date_selection.indexOf(field.ks_date_filter_selection)>=0 ? field.ks_previous_period:false,
                 target: self.ksNumFormatter(target_1, 1),
+                target_tooltip: target_1,
                 previous_period_data: previous_period_data,
                 pre_deviation: pre_deviation,
                 pre_arrow : pre_acheive ? 'up':'down',
@@ -218,7 +171,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_kpi_preview', function (requir
             }
 
             if (item_info.target_deviation===Infinity) item_info.target_arrow = false;
-            item_info.target_progress_deviation = parseInt(item_info.target_progress_deviation)?field_utils.format.integer(parseInt(item_info.target_progress_deviation)):"0"
+            item_info.target_progress_deviation = parseInt(item_info.target_progress_deviation)? field_utils.format.integer(parseInt(item_info.target_progress_deviation)):"0"
             if (field.ks_icon) {
                 if (!utils.is_bin_size(field.ks_icon)) {
                     // Use magic-word technique for detecting image type
@@ -267,7 +220,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_kpi_preview', function (requir
                     }
                 }
                 if($kpi_preview.find('.row').children().length !== 2){
-                    $kpi_preview.find('.row').children().addClass('text-center');
+                    $kpi_preview.find('.row').children().addClass('ks_text_center');
                 }
             }
             else{
@@ -281,10 +234,51 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_kpi_preview', function (requir
                          $kpi_preview = $(Qweb.render("ks_kpi_preview_template_2",item_info));
                         break;
                     case "Sum":
-                        $kpi_preview = self.ksSum(count_1, count_2, item_info,field,target_1,$kpi_preview,kpi_data);
+                        var count = count_1 + count_2
+                        item_info['count'] = self.ksNumFormatter(count, 1);
+                        item_info['count_tooltip'] = count;
+                        item_info['target_enable'] = field.ks_goal_enable;
+                        var ks_color = (target_1-count)>0? "red" : "green";
+                        item_info.pre_arrow = (target_1-count)>0? "down" : "up";
+                        item_info['ks_comparison'] = true;
+                        var target_deviation = (target_1-count)>0? Math.round(((target_1-count)/target_1)*100) : Math.round((Math.abs((target_1-count))/target_1)*100);
+                        if (target_deviation!==Infinity)  item_info.target_deviation = field_utils.format.integer(target_deviation) + "%";
+                        else {
+                            item_info.pre_arrow = false;
+                            item_info.target_deviation = target_deviation;
+                        }
+                        var target_progress_deviation = target_1 ? Math.round((count/target_1)*100) : 0;
+                        item_info.target_progress_deviation = field_utils.format.integer(target_progress_deviation) + "%";
+                        $kpi_preview = $(Qweb.render("ks_kpi_preview_template_2",item_info));
+                        $kpi_preview.find('.target_deviation').css({
+                            "color":ks_color
+                        });
+                        if(this.recordData.ks_target_view === "Progress Bar"){
+                            $kpi_preview.find('#ks_progressbar').val(target_progress_deviation)
+                        }
                         break;
                     case "Percentage":
-                        $kpi_preview = self.ksPercentage(count_1,count_2,field,item_info,target_1,$kpi_preview);
+                        var count = parseInt((count_1/count_2)*100);
+                        if(!count) count = 0;
+
+                        item_info['count'] = count ? field_utils.format.integer(count, 1)+"%" : "0%";
+                        item_info['count_tooltip'] = count ? count+"%" : "0%";
+                        item_info.target_progress_deviation = item_info['count']
+                        target_1 = target_1 > 100 ? 100 : target_1;
+                        item_info.target = target_1 + "%";
+                        item_info.target_tooltip = target_1 + "%";
+                        item_info.pre_arrow = (target_1-count)>0? "down" : "up";
+                        var ks_color = (target_1-count)>0? "red" : "green";
+                        item_info['target_enable'] = field.ks_goal_enable;
+                        item_info['ks_comparison'] = false;
+                        item_info.target_deviation = item_info.target > 100 ? 100 : item_info.target;
+                         $kpi_preview = $(Qweb.render("ks_kpi_preview_template_2",item_info));
+                        $kpi_preview.find('.target_deviation').css({
+                            "color":ks_color
+                        });
+                        if(this.recordData.ks_target_view === "Progress Bar"){
+                            $kpi_preview.find('#ks_progressbar').val(count)
+                        }
                         break;
                     case "Ratio":
                         var gcd = self.ks_get_gcd(Math.round(count_1),Math.round(count_2));

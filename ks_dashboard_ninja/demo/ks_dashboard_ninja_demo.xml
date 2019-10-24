@@ -2,7 +2,8 @@
 <odoo>
     <data>
 
-        <!-- Three Default Demo Dashboard with Templates : Template1, Template2, Template3-->
+<!--        Four Default Demo Dashboard with Templates : Sales, Template1, Template2, Template3-->
+
 
         <record id="demo_template1_dashboard" model="ks_dashboard_ninja.board">
             <field name="name">Template1 Dashboard</field>

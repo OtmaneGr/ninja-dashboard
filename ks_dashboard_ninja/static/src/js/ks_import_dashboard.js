@@ -13,7 +13,7 @@ var framework = require('web.framework');
     ListController.include({
 
         renderButtons: function($node) {
-            this.ksIsAdmin = odoo.session_info.is_admin;
+            this.ksIsAdmin = odoo.session_info.is_system;
             this._super.apply(this, arguments);
             //On Click on our custom import button, call custom import function
             if (this.$buttons) {
@@ -22,6 +22,7 @@ var framework = require('web.framework');
                 import_button.click(this.proxy('ks_import_button')) ;
                 import_input_button.change(this.proxy('ksImportFileChange')) ;
             }
+
         },
 
         // TO hide odoo default import button (it is inserted in dom by other module)
@@ -40,7 +41,7 @@ var framework = require('web.framework');
           if(this.modelName == "ks_dashboard_ninja.board"){
             if (this.hasSidebar) {
                 var other = [];
-                if(odoo.session_info.is_admin) {
+                if(odoo.session_info.is_system) {
                     other.push({label: _t("Export Dashboard"),
                         callback: this.ks_dashboard_export.bind(this)
                     })
@@ -67,11 +68,14 @@ var framework = require('web.framework');
                 this._toggleSidebar();
                 }
             }
+
         },
 
         ks_dashboard_export: function(){
             this.ks_on_dashboard_export(this.getSelectedIds());
         },
+
+
 
         ks_on_dashboard_export: function (ids){
             var self = this;
@@ -126,7 +130,9 @@ var framework = require('web.framework');
                 this._super.apply(this, arguments);
             }
         },
+
     });
     core.action_registry.add('ks_dashboard_ninja.import_button', ListController);
     return ListController;
+
 });

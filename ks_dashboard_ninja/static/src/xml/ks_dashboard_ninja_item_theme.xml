@@ -17,13 +17,11 @@
                 <span class="ks_checkmark"/>
             </div>
             <div class="ks_dashboard_theme_input_container">
-                <input class="ks_dashboard_theme_input ks_color_yellow" type="checkbox" name="Yellow Theme"
-                       value="yellow"/>
+                <input class="ks_dashboard_theme_input ks_color_yellow" type="checkbox" name="Yellow Theme" value="yellow"/>
                 <span class="ks_checkmark"/>
             </div>
             <div class="ks_dashboard_theme_input_container">
-                <input class="ks_dashboard_theme_input ks_color_green" type="checkbox" name="Green Theme"
-                       value="green"/>
+                <input class="ks_dashboard_theme_input ks_color_green" type="checkbox" name="Green Theme" value="green"/>
                 <span class="ks_checkmark"/>
             </div>
         </div>

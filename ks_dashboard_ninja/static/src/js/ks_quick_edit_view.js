@@ -7,11 +7,10 @@ odoo.define('ks_dashboard_ninja.quick_edit_view', function (require) {
     var QWeb = core.qweb;
 
     var data = require('web.data');
-    var QuickCreateFormView = require('web.QuickCreateFormView');
+    var QuickCreateFormView = require('web.FormView');
+    var Context = require('web.Context')
 
 
-
-    var AbstractAction = require('web.AbstractAction');
 
     var QuickEditView = Widget.extend({
 
@@ -48,6 +47,7 @@ odoo.define('ks_dashboard_ninja.quick_edit_view', function (require) {
             self.context['res_id']=this.item.id;
             self.res_model = "ks_dashboard_ninja.item";
             self.dataset = new data.DataSet(this, this.res_model, self.context);
+            self.context = self.dataset.get_context()
             var def = self.loadViews(this.dataset.model, self.context, [[false, 'list'], [false, 'form']], {});
             return $.when(def).then(function (fieldsViews) {
                     self.formView = new QuickCreateFormView(fieldsViews.form, {
@@ -95,7 +95,7 @@ odoo.define('ks_dashboard_ninja.quick_edit_view', function (require) {
             self.item['ks_icon'] = ksChanges['ks_icon'];
             self.item['ks_background_color'] = ksChanges['ks_background_color'];
             self.item['ks_default_icon_color'] = ksChanges['ks_default_icon_color'];
-            self.item['ks_layout'] = ksChanges['ks_layout'];
+            if(ksChanges['ks_layout']) self.item['ks_layout'] = ksChanges['ks_layout'];
             self.item['ks_record_count'] = ksChanges['ks_record_count'];
 
             if(ksChanges['ks_list_view_data']) self.item['ks_list_view_data'] = ksChanges['ks_list_view_data'];
@@ -108,6 +108,7 @@ odoo.define('ks_dashboard_ninja.quick_edit_view', function (require) {
 
             self.item['ks_chart_item_color'] = ksChanges['ks_chart_item_color'];
 
+//            self.item['ks_kpi_data'] = ksChanges['ks_kpi_data'];
             self.ksUpdateItemView();
 
         },
@@ -130,7 +131,7 @@ odoo.define('ks_dashboard_ninja.quick_edit_view', function (require) {
         ksUpdateItemView : function(){
             var self = this;
             self.ksDashboardController.ksUpdateDashboardItem([self.item.id]);
-            self.item_el = $.find('#' + self.item.id + '.ks_dashboarditem_id');
+            self.item_el = $.find(`#${self.item.id}.ks_dashboarditem_id`);
 
         },
 

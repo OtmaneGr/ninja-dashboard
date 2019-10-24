@@ -74,7 +74,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_graph_preview', function (requ
 
         _render: function () {
             this.$el.empty()
-            if (this.recordData.ks_dashboard_item_type !== 'ks_tile' && this.recordData.ks_dashboard_item_type !== 'ks_kpi' && this.recordData.ks_dashboard_item_type !== 'ks_list_view') {
+             if (this.recordData.ks_dashboard_item_type !== 'ks_tile' && this.recordData.ks_dashboard_item_type !== 'ks_kpi' && this.recordData.ks_dashboard_item_type !== 'ks_list_view') {
                 if(this.recordData.ks_model_id){
                     if (this.recordData.ks_chart_groupby_type == 'date_type' && !this.recordData.ks_chart_date_groupby) {
                         return this.$el.append($('<div>').text("Select Group by date to create chart based on date groupby"));
@@ -90,16 +90,17 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_graph_preview', function (requ
                 }else{
                     this.$el.append($('<div>').text("Select a Model first."));
                 }
-
             }
-
         },
 
         _getChartData: function () {
+
             var self = this;
-            self.shouldRenderChart = true;
             var field = this.recordData;
             var ks_chart_name;
+
+            self.shouldRenderChart = true;
+
             if (field.name) ks_chart_name = field.name;
             else if (field.ks_model_name) ks_chart_name = field.ks_model_id.data.display_name;
             else ks_chart_name = "Name";
@@ -127,6 +128,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_graph_preview', function (requ
                 default:
                     this.chart_family = "none";
                     break;
+
             }
 
             if(this.chart_family === "circle"){
@@ -135,13 +137,15 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_graph_preview', function (requ
                     return ;
                 }
             }
-            if($.find('#ksMyChart').length>0){
-                this.renderChart();
+
+            if($.find('#ksMyChart').length > 0){
+               this.renderChart();
             }
         },
 
         renderChart: function(){
-             var self = this;
+            var self = this;
+
             if(this.recordData.ks_chart_measure_field_2.count && this.recordData.ks_dashboard_item_type === 'ks_bar_chart'){
                  var self = this;
                 var scales  = {}
@@ -152,7 +156,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_graph_preview', function (requ
                         position: "left",
                         id: "y-axis-0",
                         gridLines:{
-                            display: true
+                            display: true,
                         },
                         labels: {
                             show:true,
@@ -187,7 +191,6 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_graph_preview', function (requ
                         }
                     }
                 ]
-
             }
             var chart_plugin = [];
             if (this.recordData.ks_show_data_value) {
@@ -231,7 +234,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_graph_preview', function (requ
                                     dataArr.map(data => {
                                         sum += data;
                                     });
-                                    let percentage = sum === 0 ? 0 + "%" : (value*100 / sum).toFixed(2)+"%";
+                                    let percentage = sum === 0? 0  + "%" : (value*100 / sum).toFixed(2) + "%";
                                     return percentage;
                                 },
                             },
@@ -531,9 +534,7 @@ odoo.define('ks_dashboard_ninja_list.ks_dashboard_graph_preview', function (requ
 
             }
             ksMyChart.update();
-            if(this.$el.find('canvas').height() < 250){
-                this.$el.find('canvas').height(250);
-            }
+            if (this.$el.find('#ksMyChart').height()<250) this.$el.find('#ksMyChart').height(250);
         },
 
 

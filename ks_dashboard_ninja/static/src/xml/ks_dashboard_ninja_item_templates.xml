@@ -6,11 +6,11 @@
     <t t-name="KsFieldBinaryImage">
         <div class="o_field_image" aria-atomic="true">
             <t t-if="widget.mode !== 'readonly'">
-                <div class="o_form_image_controls">
+                <div class="o_form_image_controls" style="display: flex;">
                     <button type="button" class=" fa fa-image fa-lg ks_image_widget_icon_container float-left"
                             title="Select Icons">
                     </button>
-                    <button class="fa fa-trash-o fa-lg float-right o_clear_file_button" title="Clear"
+                    <button class="fa fa-trash-o fa-lg float-right o_clear_file_button ks_clear_file_button" title="Clear"
                             aria-label="Clear"/>
                     <span class="o_form_binary_progress">Uploading...</span>
                 </div>
@@ -24,7 +24,7 @@
             <div class="modal-dialog">
 
                 <!-- Modal content-->
-                <div class="modal-content">
+                <div class="modal-content ks_icon_container_modal_content">
                     <div class="modal-header">
                         <h4 class="modal-title">Select Icon</h4>
                     </div>
@@ -78,6 +78,7 @@
                max="0.99" step="0.01"/>
     </t>
 
+
     <!--Template Layouts-->
 
     <t t-name="ks_db_list_field_required">
@@ -91,6 +92,7 @@
             <p>Coming Soon in Future :)</p>
         </div>
     </t>
+
 
     <!--layouts for items-->
     <t t-name="ks_db_list_preview_layout1">
@@ -119,13 +121,14 @@
                     <div class="ks_dashboard_item_name" t-att-title="name">
                         <t t-esc="name"/>
                     </div>
-                    <div class="ks_dashboard_item_domain_count" t-att-title="count_tooltip">
+                    <div class="ks_dashboard_item_domain_count">
                         <t t-esc="count"/>
                     </div>
                 </div>
             </div>
         </div>
     </t>
+
 
     <t t-name="ks_db_list_preview_layout2">
         <div class="ks_dashboard_item_l2  ks_db_item_preview ks_db_item_preview_color_picker">
@@ -141,7 +144,7 @@
             </div>
 
             <div class="ks_dashboard_item_main_body_l2">
-                <div class="ks_dashboard_item_domain_count_l2" t-att-title="count_tooltip">
+                <div class="ks_dashboard_item_domain_count_l2">
                     <t t-esc="count"/>
                 </div>
                 <div class="ks_dashboard_item_name_l2" t-att-title="name">
@@ -187,7 +190,7 @@
                     </t>
                 </div>
                 <div class="ks_dashboard_item_info ks_dashboard_item_info_l3">
-                    <div class="ks_dashboard_item_domain_count_l3" t-att-title="count_tooltip">
+                    <div class="ks_dashboard_item_domain_count_l3">
                         <t t-esc="count"/>
                     </div>
                     <div class="ks_dashboard_item_name_l3" t-att-title="name">
@@ -212,7 +215,7 @@
             </div>
 
             <div class="ks_dashboard_item_main_body_l2">
-                <div class="ks_dashboard_item_domain_count_l2" t-att-title="count_tooltip">
+                <div class="ks_dashboard_item_domain_count_l2">
                     <t t-esc="count"/>
                 </div>
                 <div class="ks_dashboard_item_name_l2" t-att-title="name">
@@ -228,7 +231,9 @@
                     </button>
 
                 </div>
+
             </div>
+
         </div>
     </t>
 
@@ -246,7 +251,7 @@
                 </t>
             </div>
             <div class="ks_dashboard_item_main_body_l5">
-                <div class="ks_dashboard_item_domain_count_l5" t-att-title="count_tooltip">
+                <div class="ks_dashboard_item_domain_count_l5">
                     <t t-esc="count"/>
                 </div>
                 <div class="ks_dashboard_item_name_l5" t-att-title="name">
@@ -260,6 +265,7 @@
                 <button type="button" title="Remove Item" class="ks_dashboard_item_preview_delete">
                     <i class="fa fa-times"/>
                 </button>
+
             </div>
         </div>
     </t>
@@ -267,8 +273,10 @@
 
     <t t-name="ks_db_list_preview_layout6">
         <div class="ks_dashboard_item_l2  ks_db_item_preview ks_db_item_preview_color_picker">
+
+
             <div class="ks_dashboard_item_main_body_l2">
-                <div class="ks_dashboard_item_domain_count_l2" t-att-title="count_tooltip">
+                <div class="ks_dashboard_item_domain_count_l2">
                     <t t-esc="count"/>
                 </div>
                 <div class="ks_dashboard_item_name_l2" t-att-title="name">
@@ -293,8 +301,17 @@
                     <button type="button" title="Remove Item" class="ks_dashboard_item_preview_delete">
                         <i class="fa fa-times"/>
                     </button>
+
                 </div>
             </div>
+
+        </div>
+    </t>
+
+    <t t-name="ks_db_item_preview_footer_note">
+        <div class="ks_db_item_preview_footer_note">
+            <strong>Note :</strong>
+            Changing Layout midway will set the default icon colour and font colour for selected layout.
         </div>
     </t>
 
@@ -311,14 +328,14 @@
                 </t>
             </div>
             <div class="ks_dashboard_item_main_body_l5">
-                <div class="ks_dashboard_kpi_name_preview">
+                <div class="ks_dashboard_kpi_name_preview" t-att-title="name">
                     <t t-esc="name"/>
                 </div>
                 <div class="ks_dashboard_kpi_count_preview" t-att-title="count_1_tooltip">
                     <t t-esc="count_1"/>
                 </div>
             </div>
-            <div class="row d-flex ml-auto mr-auto">
+            <div class="row ks_kpi_d_flex ml-auto mr-auto">
                 <t t-if="ks_enable_goal">
                     <div class="col">
                         <div style="color: rgba(0, 0, 0, 0.61);">
@@ -365,10 +382,10 @@
                 </t>
             </div>
             <div class="ks_dashboard_item_main_body_l5">
-                <div class="ks_dashboard_kpi_name_preview">
+                <div class="ks_dashboard_kpi_name_preview" t-att-title="name">
                     <t t-esc="name"/>
                 </div>
-                <div class="ks_dashboard_kpi_count_preview" t-att-title="count_1_tooltip">
+                <div class="ks_dashboard_kpi_count_preview" t-att-title="count_1_tooltip +' / '+target_tooltip">
                     <span class="ks_count">
                         <t t-esc="count_1"/>
                     </span>
@@ -378,16 +395,16 @@
                     </span>
                 </div>
             </div>
-            <div class="text-center ks_progress">
+            <div class="ks_text_center ks_progress">
                 <div>
                     <progress id="ks_progressbar" value="0" max="100"/>
                 </div>
-                <div class="text-center">
+                <div class="ks_text_center">
                     <t t-esc="target_progress_deviation"/>%
                 </div>
             </div>
             <t t-if="ks_previous_period and previous_period_data">
-                <div class="text-center mt-1">
+                <div class="ks_text_center ks_margin_top">
                     <div>
                         <span>vs Prev</span>
                     </div>
@@ -416,21 +433,31 @@
                 </t>
             </div>
             <div class="ks_dashboard_item_main_body_l5">
-                <div class="ks_dashboard_kpi_name_preview">
+                <div class="ks_dashboard_kpi_name_preview" t-att-title="name">
                     <t t-esc="name"/>
                 </div>
-                <div class="ks_dashboard_kpi_count_preview" t-att-title="count_tooltip">
-                    <span>
-                        <t t-esc="count"/>
-                        <t t-if="target_view =='Progress Bar' and target_enable">/
-                            <t t-esc="target"/>
-                        </t>
-                    </span>
-                </div>
+
+                <t t-if="target_view =='Progress Bar' and target_enable">
+                        <div class="ks_dashboard_kpi_count_preview" t-att-title="count_tooltip +' / '+ target_tooltip">
+                            <span>
+                                <t t-esc="count"/>
+                                /
+                                <t t-esc="target"/>
+                            </span>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="ks_dashboard_kpi_count_preview" t-att-title="count_tooltip">
+                            <span>
+                                <t t-esc="count"/>
+                            </span>
+                        </div>
+                    </t>
+
             </div>
             <t t-if="ks_enable_goal and target_enable">
                 <t t-if="target_deviation and target_view =='Number'">
-                    <div class="text-center">
+                    <div class="ks_text_center">
                         <div>
                             <span class="ks_kpi_target_grey">vs Target</span>
                         </div>
@@ -445,11 +472,11 @@
                     </div>
                 </t>
                 <t t-if="target_progress_deviation and target_view =='Progress Bar'">
-                    <div class="text-center  ks_progress">
+                    <div class="ks_text_center  ks_progress">
                         <div>
                             <progress id="ks_progressbar" value="0" max="100"/>
                         </div>
-                        <div class="text-center">
+                        <div class="ks_text_center">
                             <t t-esc="target_progress_deviation"/>
                         </div>
                     </div>
@@ -458,12 +485,5 @@
         </div>
     </t>
 
-
-    <t t-name="ks_db_item_preview_footer_note">
-        <div class="ks_db_item_preview_footer_note">
-            <strong>Note :</strong>
-            Changing Layout midway will set the default icon colour and font colour for selected layout.
-        </div>
-    </t>
 
 </templates>

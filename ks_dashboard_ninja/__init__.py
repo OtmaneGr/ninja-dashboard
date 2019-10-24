@@ -2,7 +2,6 @@
 
 from . import models
 from . import controllers
-from . import lib
 
 from odoo.api import Environment, SUPERUSER_ID
 

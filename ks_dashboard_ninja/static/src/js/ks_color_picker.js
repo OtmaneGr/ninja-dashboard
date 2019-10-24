@@ -16,6 +16,7 @@ odoo.define('ks_dashboard_ninja_list.ks_color_picker', function (require) {
         supportedFieldTypes: ['char'],
 
         events: _.extend({}, AbstractField.prototype.events, {
+//            'move.spectrum .ks_color_picker': '_ksOnColorMove',
             'change.spectrum .ks_color_picker': '_ksOnColorChange',
             'change .ks_color_opacity': '_ksOnOpacityChange',
             'input .ks_color_opacity': '_ksOnOpacityInput'
@@ -24,9 +25,9 @@ odoo.define('ks_dashboard_ninja_list.ks_color_picker', function (require) {
         init: function (parent, state, params) {
             this._super.apply(this, arguments);
 
-            this.jsLibs.push('/ks_dashboard_ninja/static/lib/js/spectrum.js');
+            this.jsLibs.push('/ks_dashboard_ninja/static/lib/js/spectrum.js', );
 
-            this.cssLibs.push('/ks_dashboard_ninja/static/lib/css/spectrum.css');
+            this.cssLibs.push('/ks_dashboard_ninja/static/lib/css/spectrum.css', );
 
         },
 

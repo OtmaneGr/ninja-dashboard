@@ -34,6 +34,12 @@
     cursor: pointer;
 }
 
+.ks_clear_file_button{
+    width : 50%;
+    background : transparent;
+    border: none;
+}
+
 .ks_domain_content{
     overflow : auto;
 }
@@ -44,12 +50,11 @@
     margin-top : 10px;
 }
 
-
-/*Container CSS*/
+/* Container css */
 
 .ks_md_heading{
     justify-content: center;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 
@@ -58,13 +63,14 @@
     padding: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     border-radius: 5px;
-    max-width: 174px;
+    min-width: 160px;
+    right: -20px
 }
 
 
 .ks_dashboard_menu_container > li{
     margin: 2px;
-    display:flex;
+  /*  display:flex; */
 }
 
 
@@ -74,26 +80,17 @@
     border-radius: 5px;
 }
 
+.ks_dashboard_select{
+    margin-top : 1rem !important;
+    margin-bottom : 1rem !important;
 
-#ks_add_item_selection,#ks_date_selector_container{
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-#ks_dashboard_layout_edit{
-    border-radius: 3px;
-    color: #fff;
-    /*background-color: #357bb7;*/
-    /*border: 1px solid #357bb7;*/
+.ks_move_duplicate_button{
+    margin-top : 1rem !important;
 }
 
-.ks_add_item_type_button{
-    color:#fff;
-    /*background-color: #357bb7;
-    border: 1px solid #357bb7;*/
-    border-radius: 3px;
-}
-
-/* kpi css*/
+/* KPI css*/
 
 .ks_dashboard_kpi_name_preview {
     font-size: 21px;
@@ -105,9 +102,6 @@
 
 .ks_kpi_main_body {
     width: 100%;
-/*
-    height: 67%;
-*/
 }
 
 .ks_dashboard_kpi_count_preview {
@@ -162,17 +156,40 @@
     height: 5px;
     border-radius: 9px;
 }
- .ks_progress progress::-webkit-progress-bar {
-    background-color: #000;
-    border-radius: 9px;
-}
-.ks_progress progress::progress-value {
-    background: #fff;
-    border-radius: 9px;
-}
-.ks_progress progress::progress-bar {
-    background: #fff;
-    border-radius: 9px;
+
+/*
+     .ks_progress progress::-webkit-progress-bar {
+        background-color: #000;
+        border-radius: 9px;
+    }
+    .ks_progress progress::progress-value {
+        background: #fff;
+        border-radius: 9px;
+    }
+    .ks_progress progress::progress-bar {
+        background: #fff;
+        border-radius: 9px;
+    }
+*/
+.ks_kpi_d_flex {
+    display: flex!important;
 }
 
+.ks_text_center {
+   text-align: center !important;
+}
 
+.ks_margin_top {
+    margin-top: 0.25rem !important;
+}
+
+.ml-auto {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 10px;
+    justify-content : space-between;
+}
+
+.row > .col {
+     width: -webkit-fill-available;
+}

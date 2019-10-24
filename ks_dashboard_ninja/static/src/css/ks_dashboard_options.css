@@ -80,6 +80,17 @@ i.ks-options-plus {
   height: 4000px !important;
 }
 
+.ks_dashboard_item_name_l2{
+    font-weight: bold;
+    font-size: medium;
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
 .ks_dashboard_header_name {
     text-align: start;
 }
